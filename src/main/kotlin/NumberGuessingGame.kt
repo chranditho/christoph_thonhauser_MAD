@@ -2,12 +2,14 @@ import util.generateFourDigitNumber
 
 class NumberGuessingGame {
 
-    fun play() {
-        println("Welcome to the Number Guessing Game!")
+    companion object {
+        fun start() {
+            println("Welcome to the Number Guessing Game!")
 
-        // print("Please input your first 4-digit number guess:   ")
+            // print("Please input your first 4-digit number guess:   ")
 
-        val numberToGuess = generateFourDigitNumber()
-        println("This is the number to guess:  $numberToGuess")
+            val numberToGuess = generateFourDigitNumber()
+            println("This is the number to guess:  $numberToGuess")
+        }
     }
 }

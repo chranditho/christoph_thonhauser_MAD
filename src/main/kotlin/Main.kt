@@ -1,4 +1,1 @@
-fun main() {
-    val guessingGame = NumberGuessingGame()
-    guessingGame.play()
-}
+fun main() = NumberGuessingGame.start()
