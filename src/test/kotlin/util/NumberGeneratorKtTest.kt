@@ -7,7 +7,7 @@ class NumberGeneratorKtTest {
 
     @Test
     fun `ensure number consists of four digits`() {
-        Assertions.assertEquals(generateFourDigitNumberWithUniqueDigits().toString().length, 4)
+        Assertions.assertEquals(4, generateFourDigitNumberWithUniqueDigits().toString().length)
     }
 
     @Test
