@@ -12,7 +12,7 @@ fun generateFourDigitNumber(): Number {
         hundredsPlace = (Math.random() * 10).toInt()
 
     var thousandsPlace = (Math.random() * 10).toInt()
-    while (thousandsPlace == oncePlace || thousandsPlace == tensPlace || thousandsPlace == hundredsPlace)
+    while (thousandsPlace == oncePlace || thousandsPlace == tensPlace || thousandsPlace == hundredsPlace || thousandsPlace == 0)
         thousandsPlace = (Math.random() * 10).toInt()
 
     tensPlace *= 10
