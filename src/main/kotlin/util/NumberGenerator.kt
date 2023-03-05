@@ -1,6 +1,6 @@
 package util
 
-fun generateFourDigitNumber(): Int {
+fun generateFourDigitNumberWithUniqueDigits(): Int {
     val oncePlace = (Math.random() * 10).toInt()
 
     var tensPlace = (Math.random() * 10).toInt()
