@@ -1,4 +1,4 @@
-package com.example.lectureexamples.util
+package com.example.movieapp.util
 
 fun countSharedDigits(num1: Int, num2: Int): Int {
     val digits1 = num1.toString().toSet()
