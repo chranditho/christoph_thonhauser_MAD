@@ -9,13 +9,13 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LectureExamples"
+        android:theme="@style/Theme.movieapp"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.LectureExamples">
+            android:theme="@style/Theme.movieapp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
