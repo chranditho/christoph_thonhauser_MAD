@@ -1,5 +1,7 @@
-package com.example.movieapp.util
+package numberguessinggame.util
 
+import numberguessinggame.util.countSharedDigits
+import numberguessinggame.util.countSharedDigitsAtSamePosition
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

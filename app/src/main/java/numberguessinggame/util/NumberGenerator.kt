@@ -1,4 +1,4 @@
-package com.example.movieapp.util
+package numberguessinggame.util
 
 fun generateFourDigitNumberWithUniqueDigits(): Int {
     val digits = mutableListOf<Int>()

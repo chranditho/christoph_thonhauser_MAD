@@ -1,5 +1,6 @@
-package com.example.movieapp.util
+package numberguessinggame.util
 
+import numberguessinggame.util.generateFourDigitNumberWithUniqueDigits
 import org.junit.Test
 
 class NumberGeneratorKtTest {
