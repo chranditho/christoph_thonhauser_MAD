@@ -34,7 +34,9 @@ fun HomeScreen(navController: NavController) {
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
     ) {
+
         Column {
+            TopAppBar("Movies")
             Greeting()
             Text(
                 style = MaterialTheme.typography.h6,
@@ -64,6 +66,22 @@ fun MyList(navController: NavController = rememberNavController(),
             }
         }
     }
+}
+
+@Composable
+fun TopAppBar(title: String = "Movie App") {
+    TopAppBar(
+        title = { Text(text = title) },
+        actions = {
+            Icon(
+                imageVector = Icons.Default.FavoriteBorder,
+                contentDescription = "Favorites",
+                modifier = Modifier
+                    .padding(10.dp)
+                    .clickable { /*TODO*/ }
+            )
+        }
+    )
 }
 
 
