@@ -11,8 +11,10 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -70,16 +72,23 @@ fun MyList(navController: NavController = rememberNavController(),
 
 @Composable
 fun TopAppBar(title: String = "Movie App") {
+    var expanded by remember { mutableStateOf(false) }
     TopAppBar(
         title = { Text(text = title) },
         actions = {
-            Icon(
-                imageVector = Icons.Default.FavoriteBorder,
-                contentDescription = "Favorites",
-                modifier = Modifier
-                    .padding(10.dp)
-                    .clickable { /*TODO*/ }
-            )
+            IconButton(onClick = { expanded = !expanded }) {
+                Icon(Icons.Default.MoreVert, contentDescription = "More options")
+            }
+            DropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { expanded = false }
+            ) {
+                DropdownMenuItem(onClick = { /* Handle Favorites click */ }) {
+                    Icon(Icons.Default.Favorite, contentDescription = "Favorites")
+                    Spacer(Modifier.width(8.dp))
+                    Text("Favorites")
+                }
+            }
         }
     )
 }
