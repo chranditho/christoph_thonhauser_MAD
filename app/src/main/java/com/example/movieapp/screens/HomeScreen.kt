@@ -53,12 +53,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.movieapp.R
+import coil.compose.rememberImagePainter
 import com.example.movieapp.models.Movie
 import com.example.movieapp.models.getMovies
 
@@ -137,8 +136,10 @@ fun MovieRow(movie: Movie, onItemClick: (String) -> Unit = {}) {
                     .height(150.dp)
                     .fillMaxWidth()
             ) {
+                val painter = rememberImagePainter(data = movie.images[0], builder = {
+                })
                 Image(
-                    painter = painterResource(id = R.drawable.avatar2),
+                    painter = painter,
                     contentDescription = "Movie Poster",
                     contentScale = ContentScale.Crop
                 )
