@@ -161,7 +161,7 @@ fun MovieRow(movie: Movie, onItemClick: (String) -> Unit = {}) {
                 modifier = Modifier
                     .clickable(onClick = { expanded = !expanded })
                     .fillMaxWidth()
-                    .padding(5.dp),
+                    .padding(20.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
 
                 ) {
