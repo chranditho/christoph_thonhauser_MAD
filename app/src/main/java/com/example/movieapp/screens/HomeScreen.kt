@@ -31,6 +31,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.Composable
@@ -160,10 +161,17 @@ fun MovieRow(movie: Movie, onItemClick: (String) -> Unit = {}) {
 
                 ) {
                 Text(movie.title, style = MaterialTheme.typography.h6)
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowUp,
-                    contentDescription = "Show details"
-                )
+                if (expanded) {
+                    Icon(
+                        imageVector = Icons.Default.KeyboardArrowDown,
+                        contentDescription = "Hide details"
+                    )
+                } else {
+                    Icon(
+                        imageVector = Icons.Default.KeyboardArrowUp,
+                        contentDescription = "Show details"
+                    )
+                }
             }
             if (expanded) {
                 Box(
