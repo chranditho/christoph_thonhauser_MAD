@@ -1,6 +1,15 @@
 package com.example.movieapp.screens
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -43,6 +52,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -52,20 +62,20 @@ import com.example.movieapp.R
 import com.example.movieapp.models.Movie
 import com.example.movieapp.models.getMovies
 
+
+@RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun HomeScreen(navController: NavController) {
     // A surface container using the 'background' color from the theme
     Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colors.background
+        modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background
     ) {
 
         Column {
             TopAppBar("Movies")
             Greeting()
             Text(
-                style = MaterialTheme.typography.h6,
-                text = "Movie List"
+                style = MaterialTheme.typography.h6, text = "Movie List"
             )
             MyList(navController)
         }
@@ -73,11 +83,11 @@ fun HomeScreen(navController: NavController) {
 }
 
 
+@RequiresApi(Build.VERSION_CODES.Q)
 @Preview
 @Composable
 fun MyList(
-    navController: NavController = rememberNavController(),
-    movies: List<Movie> = getMovies()
+    navController: NavController = rememberNavController(), movies: List<Movie> = getMovies()
 ) {
     LazyColumn {
         items(movies) { movie ->
@@ -94,27 +104,22 @@ fun MyList(
 @Composable
 fun TopAppBar(title: String = "Movie App") {
     var expanded by remember { mutableStateOf(false) }
-    TopAppBar(
-        title = { Text(text = title) },
-        actions = {
-            IconButton(onClick = { expanded = !expanded }) {
-                Icon(Icons.Default.MoreVert, contentDescription = "More options")
-            }
-            DropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false }
-            ) {
-                DropdownMenuItem(onClick = { /* Handle Favorites click */ }) {
-                    Icon(Icons.Default.Favorite, contentDescription = "Favorites")
-                    Spacer(Modifier.width(8.dp))
-                    Text("Favorites")
-                }
+    TopAppBar(title = { Text(text = title) }, actions = {
+        IconButton(onClick = { expanded = !expanded }) {
+            Icon(Icons.Default.MoreVert, contentDescription = "More options")
+        }
+        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+            DropdownMenuItem(onClick = { /* Handle Favorites click */ }) {
+                Icon(Icons.Default.Favorite, contentDescription = "Favorites")
+                Spacer(Modifier.width(8.dp))
+                Text("Favorites")
             }
         }
-    )
+    })
 }
 
 
+@RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun MovieRow(movie: Movie, onItemClick: (String) -> Unit = {}) {
     var expanded by remember { mutableStateOf(false) }
@@ -141,7 +146,7 @@ fun MovieRow(movie: Movie, onItemClick: (String) -> Unit = {}) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(10.dp),
+                        .padding(30.dp),
                     contentAlignment = Alignment.TopEnd,
                 ) {
                     Icon(
@@ -173,15 +178,20 @@ fun MovieRow(movie: Movie, onItemClick: (String) -> Unit = {}) {
                     )
                 }
             }
-            if (expanded) {
-                Box(
+            val density = LocalDensity.current
+            AnimatedVisibility(visible = expanded, enter = slideInVertically {
+                with(density) { -40.dp.roundToPx() }
+            } + expandVertically(
+                expandFrom = Alignment.Top
+            ) + fadeIn(
+                initialAlpha = 0.3f
+            ), exit = slideOutVertically() + shrinkVertically() + fadeOut()) {
+                Text(
+                    "Director: ${movie.director}\r\nRelease: ${movie.year}\r\nGenre: ${movie.genre}\r\nActors: ${movie.actors}\r\nRating: ${movie.rating}\r\nPlot: ${movie.plot}",
                     modifier = Modifier
-                        .padding(5.dp)
                         .fillMaxWidth()
-                        .clickable(onClick = { expanded = !expanded })
-                ) {
-                    Text(movie.actors, style = MaterialTheme.typography.body2)
-                }
+                        .padding(20.dp)
+                )
             }
         }
     }
@@ -212,44 +222,8 @@ fun Greeting() {
 
         Text(text = "Hello ${name}!")
 
-        OutlinedTextField(
-            value = name,
-            onValueChange = {
-                name = it
-            },
-            label = { Text("Name") }
-        )
-
-
-        /*
-        // step 2 - add a mutableStateOf to fire the event for recomposition
-
-       var name = mutableStateOf("")   // use a state holder to register changes
-        // var name  by mutableStateOf("")
-        Text(text = "Hello ${name.value}!")   // get value of state holder object
-
-        OutlinedTextField(
-            value = name.value,
-            onValueChange = { name.value = it },    // change its value accordingly
-            label = { Text("Name")}
-        )
-        */
-
-
-        /*
-        // step 3 - use remember
-        var name by remember {         // use remember to skip overwriting after first composition
-            mutableStateOf("")
-        }
-
-        Text(text = "Hello ${name}!")
-
-        OutlinedTextField(
-            value = name,
-            onValueChange = { name = it },
-            label = { Text("Name")}
-        )
-
-         */
+        OutlinedTextField(value = name, onValueChange = {
+            name = it
+        }, label = { Text("Name") })
     }
 }
