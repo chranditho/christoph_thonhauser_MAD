@@ -65,7 +65,10 @@ fun HomeScreen(navController: NavController) {
     ) {
 
         Column {
-            com.example.movieapp.widgets.TopAppBar("Movies")
+            com.example.movieapp.widgets.TopAppBar(
+                "Movies",
+                navController = navController
+            )
             Greeting()
             Text(
                 style = MaterialTheme.typography.h6, text = "Movie List"

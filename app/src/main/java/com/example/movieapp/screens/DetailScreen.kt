@@ -10,7 +10,7 @@ import com.example.movieapp.widgets.TopAppBar
 fun DetailScreen(navController: NavController, movieId: String?) {
     val movie: Movie = getMovies().filter { it.id == movieId }[0]
 
-    TopAppBar(title = movie.title)
+    TopAppBar(title = movie.title, showDropDownMenu = false, showBackButton = true, navController = navController)
 
 
 }
