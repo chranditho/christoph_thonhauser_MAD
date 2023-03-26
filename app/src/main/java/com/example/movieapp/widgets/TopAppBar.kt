@@ -39,7 +39,7 @@ fun TopAppBar(
                 Icon(Icons.Default.MoreVert, contentDescription = "More options")
             }
             DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-                DropdownMenuItem(onClick = { /* Handle Favorites click */ }) {
+                DropdownMenuItem(onClick = {                 navController.navigate("favorite") }) {
                     Icon(Icons.Default.Favorite, contentDescription = "Favorites")
                     Spacer(Modifier.width(8.dp))
                     Text("Favorites")
