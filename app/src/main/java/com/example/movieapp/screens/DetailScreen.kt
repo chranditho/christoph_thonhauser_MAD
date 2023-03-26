@@ -18,9 +18,11 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 import com.example.movieapp.models.Movie
 import com.example.movieapp.models.getMovies
 import com.example.movieapp.widgets.MovieRow
@@ -57,18 +59,18 @@ fun MovieLazyRow(movieImages: List<String>) {
         itemsIndexed(movieImages) { index, image ->
             Card(
                 modifier = Modifier
-                    .width(120.dp)
-                    .height(180.dp)
+                    .width(180.dp)
+                    .height(120.dp)
                     .padding(horizontal = 8.dp),
                 elevation = 8.dp
             ) {
                 Box(modifier = Modifier.fillMaxSize()) {
                     Image(
-                        painter = rememberImagePainter(
-                            data = image,
-                            builder = {
-                                crossfade(true)
-                            }
+                        painter = rememberAsyncImagePainter(
+                            ImageRequest.Builder(LocalContext.current).data(data = image)
+                                .apply(block = fun ImageRequest.Builder.() {
+                                    crossfade(true)
+                                }).build()
                         ),
                         contentDescription = null,
                         modifier = Modifier
